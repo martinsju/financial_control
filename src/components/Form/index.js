@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import * as C from './styles.js'
+import * as C from './styled.js'
 
-function Form() {
+function Form({ handleAdd }) {
 	const [description, setDescription] = useState('')
 	const [amount, setAmount] = useState('')
 	const [isExpense, setExpense] = useState(false)
@@ -14,6 +14,16 @@ function Form() {
 			alert('Value must be a positive number')
 			return
 		}
+
+		const transaction = {
+			id: null,
+			description: description,
+			amount: amount,
+			isExpense: isExpense
+		}
+		handleAdd(transaction)
+		// setDescription('')
+		// setAmount('')
 	}
 
 	return (

@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Resume from './components/Resume'
 import Form from './components/Form'
 import { useEffect, useState } from 'react'
+import TransactionsList from './components/TransactionsList'
 
 function App() {
 	const data = localStorage.getItem('transactions')
@@ -14,37 +15,57 @@ function App() {
 	const [total, setTotal] = useState(0)
 
 	useEffect(() => {
-		const amountExpense = transactionsList
-			.filter((item) => item.expense)
-			.map((transaction) => Number(transaction.amount))
-
 		const amountIncome = transactionsList
-			.filter((item) => !item.expense)
+			.filter((item) => !item.isExpense)
 			.map((transaction) => Number(transaction.amount))
 
-		const expenseTotal = amountExpense
-			.reduce((acc, curr) => acc + curr, 0)
-			.toFixed(2)
+		console.log('amount income: ', amountIncome)
+
+		const amountExpense = transactionsList
+			.filter((item) => item.isExpense)
+			.map((transaction) => Number(transaction.amount))
+
+		console.log('amount Expense: ', amountExpense)
 
 		const incomeTotal = amountIncome
+			.reduce((acc, curr) => acc + curr, 0)
+			.toFixed(2)
+		const expenseTotal = amountExpense
 			.reduce((acc, curr) => acc + curr, 0)
 			.toFixed(2)
 
 		const total = Math.abs(incomeTotal - expenseTotal).toFixed(2)
 
-		setIncome(`R$ ${incomeTotal}`)
-		setExpense(`R$ ${expenseTotal}`)
+		setIncome(`R$ ${Number(incomeTotal)}`)
+		setExpense(`R$ ${Number(expenseTotal)}`)
 		setTotal(
-			`${Number(incomeTotal) < Number(expenseTotal) ? '-' : ''}R$ ${total}`
+			`${Number(incomeTotal) < Number(expenseTotal) ? '-' : ''}R$ ${Number(
+				total
+			)}`
 		)
-	}, [transactionsList]) //
+		console.log('income is: ', income)
+		console.log('expense is: ', expense)
+		console.log('total is: ', total)
+	}, [transactionsList])
+
+	function handleAdd(transaction) {
+		const lastID = transactionsList[transactionsList.length - 1]?.id ?? 0
+		transaction.id = lastID + 1
+
+		const newTransactionsList = [...transactionsList, transaction]
+		setTransactionsList(newTransactionsList)
+
+		localStorage.setItem('transactions', JSON.stringify(newTransactionsList))
+		console.log('local is ', transaction)
+	}
 
 	return (
 		<>
 			<GlobalStyles />
 			<Header />
 			<Resume income={income} expense={expense} total={total} />
-			<Form />
+			<Form handleAdd={handleAdd} />
+			<TransactionsList list={transactionsList} />
 		</>
 	)
 }
