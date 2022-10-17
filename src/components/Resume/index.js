@@ -1,6 +1,6 @@
 import React from 'react'
 import ResumeItem from '../ResumeItem/index.js'
-import * as C from './styles.js'
+import * as C from './styled.js'
 import {
 	FaRegArrowAltCircleUp,
 	FaRegArrowAltCircleDown,
