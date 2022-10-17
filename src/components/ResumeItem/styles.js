@@ -27,10 +27,11 @@ export const Container = styled.div`
 export const Title = styled.header`
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: center;
 	width: 100%;
 	margin-bottom: 10px;
 	gap: 10px;
+	font-weight: 400;
 
 	svg {
 		width: 25px;
