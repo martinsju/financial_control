@@ -1,5 +1,5 @@
 import React from 'react'
-import * as C from './styles.js'
+import * as C from './styled.js'
 
 function Header() {
 	return (
