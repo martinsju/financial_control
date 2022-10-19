@@ -11,7 +11,7 @@ export const Container = styled.div`
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	padding: 15px 15px;
+	padding: 20px 25px;
 	gap: 10px;
 
 	@media (max-width: 750px) {
