@@ -49,9 +49,6 @@ function App() {
 	}, [transactionsList])
 
 	function handleAdd(transaction) {
-		const lastID = transactionsList[transactionsList.length - 1]?.id ?? 0
-		transaction.id = lastID + 1
-
 		const newTransactionsList = [...transactionsList, transaction]
 		setTransactionsList(newTransactionsList)
 
@@ -64,7 +61,7 @@ function App() {
 			<GlobalStyles />
 			<Header />
 			<Resume income={income} expense={expense} total={total} />
-			<Form handleAdd={handleAdd} />
+			<Form handleAdd={handleAdd} list={transactionsList} />
 			<TransactionsList list={transactionsList} />
 		</>
 	)

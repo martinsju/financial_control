@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as C from './styled.js'
 
-function Form({ handleAdd }) {
+function Form({ handleAdd, list }) {
 	const [description, setDescription] = useState('')
 	const [amount, setAmount] = useState('')
 	const [isExpense, setExpense] = useState(false)
@@ -15,8 +15,10 @@ function Form({ handleAdd }) {
 			return
 		}
 
+		const lastID = list[list.length - 1]?.id ?? 0
+
 		const transaction = {
-			id: null,
+			id: lastID + 1,
 			description: description,
 			amount: amount,
 			isExpense: isExpense
