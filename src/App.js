@@ -62,7 +62,7 @@ function App() {
 			<Header />
 			<Resume income={income} expense={expense} total={total} />
 			<Form handleAdd={handleAdd} list={transactionsList} />
-			<TransactionsList list={transactionsList} />
+			<TransactionsList list={transactionsList} setList={setTransactionsList} />
 		</>
 	)
 }
